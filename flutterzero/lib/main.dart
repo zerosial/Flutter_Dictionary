@@ -152,6 +152,8 @@ class DictionaryScreenState extends State<DictionaryScreen> {
     });
   }
 
+  void _routeDesign() {}
+
   void _deleteWord(String term) {
     setState(() {
       dictionary.delete(term);
@@ -195,23 +197,26 @@ class DictionaryScreenState extends State<DictionaryScreen> {
                             const InputDecoration(labelText: 'Definition'),
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: _addWord,
-                            child: const Text('Add Word'),
-                          ),
-                          const SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: _updateWord,
-                            child: const Text('Update Word'),
-                          ),
-                          const SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: _upsertWord,
-                            child: const Text('Upsert Word'),
-                          ),
-                        ],
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal, // 좌우 스크롤 가능하도록 설정
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: _addWord,
+                              child: const Text('Add Word'),
+                            ),
+                            const SizedBox(width: 10),
+                            ElevatedButton(
+                              onPressed: _updateWord,
+                              child: const Text('Update Word'),
+                            ),
+                            const SizedBox(width: 10),
+                            ElevatedButton(
+                              onPressed: _upsertWord,
+                              child: const Text('Upsert Word'),
+                            ),
+                          ],
+                        ),
                       ),
                       if (feedbackMessage.isNotEmpty)
                         Padding(
@@ -339,9 +344,20 @@ class DictionaryScreenState extends State<DictionaryScreen> {
           Positioned(
             right: 16,
             bottom: 16,
-            child: FloatingActionButton(
-              onPressed: _toggleWordList,
-              child: Icon(isListVisible ? Icons.close : Icons.list),
+            child: Column(
+              spacing: 10,
+              children: [
+                FloatingActionButton(
+                  onPressed: _toggleWordList,
+                  child: Icon(isListVisible ? Icons.close : Icons.list),
+                ),
+                FloatingActionButton(
+                  onPressed: _routeDesign,
+                  child: const Icon(
+                    Icons.picture_in_picture,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
