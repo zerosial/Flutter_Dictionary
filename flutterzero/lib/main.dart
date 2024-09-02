@@ -77,10 +77,10 @@ class DictionaryScreen extends StatefulWidget {
   const DictionaryScreen({super.key});
 
   @override
-  _DictionaryScreenState createState() => _DictionaryScreenState();
+  DictionaryScreenState createState() => DictionaryScreenState();
 }
 
-class _DictionaryScreenState extends State<DictionaryScreen> {
+class DictionaryScreenState extends State<DictionaryScreen> {
   final Dictionary dictionary = Dictionary();
 
   // Controllers for adding words
