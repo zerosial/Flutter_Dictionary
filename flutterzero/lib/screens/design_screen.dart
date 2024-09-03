@@ -23,12 +23,23 @@ class _DesignScreenState extends State<DesignScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.people),
-                  Icon(Icons.add),
-                ],
+              const Padding(
+                padding: EdgeInsets.all(6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      radius: 24, // 원의 반지름 (크기를 조절할 수 있습니다)
+                      backgroundImage:
+                          AssetImage('assets/images/avatar.png'), // 이미지 경로
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(6),
