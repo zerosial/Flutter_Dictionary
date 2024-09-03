@@ -21,7 +21,7 @@ class _DesignScreenState extends State<DesignScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 10,
+                height: 40,
               ),
               const Padding(
                 padding: EdgeInsets.all(6),
@@ -58,6 +58,22 @@ class _DesignScreenState extends State<DesignScreen> {
                       child: Row(
                         spacing: 12,
                         children: [
+                          Text(
+                            "14",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 36,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Text(
+                            "15",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 36,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                           Row(
                             spacing: 6,
                             children: [
@@ -123,6 +139,14 @@ class _DesignScreenState extends State<DesignScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
+                          Text(
+                            "22",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 36,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -158,7 +182,16 @@ class _DesignScreenState extends State<DesignScreen> {
                 meetingTitle: "WEEKLY PLANNING",
                 participants: ["Den", "NANA", "MARK"],
                 color: Color(0xFFBCEE4B),
-              )
+              ),
+              const MeetingCard(
+                startHour: "17",
+                startMinute: "00",
+                endHour: "18",
+                endMinute: "00",
+                meetingTitle: "DESIGN MEETING",
+                participants: ["Alex", "Helena", "Nana"],
+                color: Color.fromARGB(255, 254, 214, 84),
+              ),
             ],
           ),
         ),
