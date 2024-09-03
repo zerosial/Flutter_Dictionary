@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterzero/widget/Meeting_card.dart';
+import 'package:flutterzero/widget/meeting_card.dart';
 
 class DesignScreen extends StatefulWidget {
   const DesignScreen({super.key});
@@ -12,7 +12,7 @@ class _DesignScreenState extends State<DesignScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF1F1F1F),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -36,11 +36,21 @@ class _DesignScreenState extends State<DesignScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 10,
                 children: [
-                  const Text("Monday 16"),
+                  const Text(
+                    "Monday 16",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   Row(
                     spacing: 8,
                     children: [
-                      const Text("TODAY"),
+                      const Text(
+                        "TODAY",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                       Center(
                         child: Container(
                           width: 5.0, // 너비 5px
@@ -51,10 +61,30 @@ class _DesignScreenState extends State<DesignScreen> {
                           ),
                         ),
                       ),
-                      const Text("17"),
-                      const Text("18"),
-                      const Text("19"),
-                      const Text("20"),
+                      Text(
+                        "17",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "18",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "19",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "20",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(

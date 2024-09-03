@@ -24,10 +24,15 @@ class MeetingCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(
+          left: 16,
+          top: 24,
+          right: 16,
+          bottom: 16,
+        ),
         child: Row(
           spacing: 14,
           children: [
