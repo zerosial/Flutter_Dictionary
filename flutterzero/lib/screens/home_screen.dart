@@ -341,10 +341,12 @@ class DictionaryScreenState extends State<DictionaryScreen> {
               spacing: 10,
               children: [
                 FloatingActionButton(
+                  heroTag: 'toggleWordList',
                   onPressed: _toggleWordList,
                   child: Icon(isListVisible ? Icons.close : Icons.list),
                 ),
                 FloatingActionButton(
+                  heroTag: 'routeDesign',
                   onPressed: _routeDesign,
                   child: const Icon(
                     Icons.picture_in_picture,
