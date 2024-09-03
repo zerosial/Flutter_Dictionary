@@ -10,11 +10,26 @@ class DesignScreen extends StatefulWidget {
 class _DesignScreenState extends State<DesignScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dictionary App'),
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.people),
+                Icon(Icons.add),
+              ],
+            ),
+          ],
+        ),
       ),
-      body: const Text('Dictionary App'),
     );
   }
 }
