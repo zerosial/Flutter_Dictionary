@@ -4,6 +4,10 @@
 ![chrome_hoPnXbhi4u](https://github.com/user-attachments/assets/7d5ba6e6-db11-494f-b93e-0bafde254b69)
 ![chrome_iWUUCH1RtN](https://github.com/user-attachments/assets/88202814-6d09-47d5-83d6-66398bc240d0)
 
+## 스케쥴 CSS 디자인
+[schedule_css.webm](https://github.com/user-attachments/assets/17361ade-2d67-4652-a0b7-97ff9418d4d0)
+
+
 ## 기능
 추가, 업데이트, 추가 + 업데이트
 삭제, 리스트 전체보기, 리스트 중 삭제
