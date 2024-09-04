@@ -12,6 +12,18 @@ class _DesignScreenState extends State<DesignScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1F1F1F),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        title: const Text(
+          'Schedule App',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       backgroundColor: const Color(0xFF1F1F1F),
       body: SingleChildScrollView(
         child: Padding(
@@ -20,9 +32,6 @@ class _DesignScreenState extends State<DesignScreen> {
             spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 40,
-              ),
               const Padding(
                 padding: EdgeInsets.all(6),
                 child: Row(
