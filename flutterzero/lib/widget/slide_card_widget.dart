@@ -27,6 +27,10 @@ class _SlideCardWidgetState extends State<SlideCardWidget> {
   bool isSlidingMinutes = false; // 분 카드 슬라이드 여부
   bool isPaused = true; // 일시정지 여부
   late Timer timer;
+  int selectedMinutes = 10; // 선택된 분
+  int pomodoroCount = 0;
+
+  final List<int> minuteOptions = [5, 10, 15, 20, 25, 30]; // 시간 선택 옵션
 
   @override
   void initState() {
@@ -43,52 +47,68 @@ class _SlideCardWidgetState extends State<SlideCardWidget> {
 
   void startSliding() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!isPaused) {
-        setState(() {
-          if (counter > 0) {
-            isSlidingSeconds = true; // 초 카드 슬라이드를 시작
-            widget.onCounterChange(counter);
-          } else {
-            timer.cancel();
-          }
-
+      setState(() {
+        if (counter > 1) {
+          isSlidingSeconds = true;
           if (counter % 60 == 0 && counter != 0) {
-            isSlidingMinutes = true; // 분 카드 슬라이드를 시작 (초가 0일 때)
+            isSlidingMinutes = true;
           }
-        });
 
-        // 애니메이션이 끝난 후 다시 카드 위치와 투명도를 초기화
-        Future.delayed(const Duration(milliseconds: 500), () {
-          setState(() {
-            isSlidingSeconds = false; // 초 카드 슬라이드 종료
-            if (isSlidingMinutes) {
-              isSlidingMinutes = false; // 분 카드 슬라이드 종료
-            }
-
-            if (counter > 0) {
-              counter--;
-            }
+          Future.delayed(const Duration(milliseconds: 500), () {
+            setState(() {
+              if (counter > 0) {
+                counter--;
+              }
+              isSlidingSeconds = false;
+              if (isSlidingMinutes) {
+                isSlidingMinutes = false;
+              }
+            });
           });
-        });
-      }
+        } else {
+          isPaused = true;
+          counter = selectedMinutes * 60;
+          timer.cancel();
+          pomodoroCount = pomodoroCount + 1;
+          widget.onCounterChange(pomodoroCount);
+          return;
+        }
+      });
     });
   }
 
   void pauseTimer() {
     setState(() {
-      isPaused = true;
+      isPaused = true; // 타이머 일시정지
+      timer.cancel(); // 타이머 취소
     });
   }
 
   void resumeTimer() {
     setState(() {
-      isPaused = false;
+      if (isPaused) {
+        isPaused = false; // 타이머 재개
+        if (!timer.isActive) {
+          startSliding(); // 타이머 다시 시작
+        }
+      }
     });
   }
 
   void resetTimer() {
     setState(() {
-      counter = widget.initialCount;
+      counter = selectedMinutes * 60; // 선택된 시간으로 초기화
+      isPaused = true; // 초기화 후 일시정지 상태로 전환
+      timer.cancel(); // 타이머가 작동 중이면 취소
+    });
+  }
+
+  void selectMinutes(int minutes) {
+    setState(() {
+      selectedMinutes = minutes;
+      counter = selectedMinutes * 60; // 선택된 시간으로 카운터 초기화
+      isPaused = true; // 시간 선택 후 일시정지 상태로 유지
+      timer.cancel(); // 타이머가 이미 작동 중이면 취소
     });
   }
 
@@ -107,6 +127,48 @@ class _SlideCardWidgetState extends State<SlideCardWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // 시간 선택 스크롤 영역
+        SizedBox(
+          height: 80,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: minuteOptions.length,
+            itemBuilder: (context, index) {
+              bool isSelected = minuteOptions[index] == selectedMinutes;
+              return GestureDetector(
+                onTap: () {
+                  if (isPaused) {
+                    setState(() {
+                      selectedMinutes = minuteOptions[index];
+                      selectMinutes(selectedMinutes);
+                    });
+                  }
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: isSelected ? 80 : 60, // 선택된 시간은 더 크게 표시
+                  height: isSelected ? 80 : 60,
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: isSelected ? Colors.blueAccent : Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${minuteOptions[index]}',
+                      style: TextStyle(
+                        fontSize: isSelected ? 28 : 22, // 선택된 시간은 더 크게 표시
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 20),
         // 카드 슬라이드 표시
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -210,7 +272,15 @@ class _SlideCardWidgetState extends State<SlideCardWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: isPaused ? resumeTimer : pauseTimer,
+              onPressed: () {
+                setState(() {
+                  if (isPaused) {
+                    resumeTimer(); // 재생
+                  } else {
+                    pauseTimer(); // 일시정지
+                  }
+                });
+              },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(120, 50),
               ),

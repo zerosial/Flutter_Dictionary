@@ -16,38 +16,6 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
   int totalPomodoros = 0;
   late Timer timer;
 
-  void onTick(Timer timer) {
-    if (totalSeconds == 0) {
-      setState(() {
-        totalPomodoros = totalPomodoros + 1;
-        isRunning = false;
-        totalSeconds = twentyFiveMinutes;
-      });
-      timer.cancel();
-    } else {
-      setState(() {
-        totalSeconds = totalSeconds - 1;
-      });
-    }
-  }
-
-  void onStartPressed() {
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      onTick,
-    );
-    setState(() {
-      isRunning = true;
-    });
-  }
-
-  void onPausePressed() {
-    timer.cancel();
-    setState(() {
-      isRunning = false;
-    });
-  }
-
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     return duration.toString().split(".").first.substring(2, 7);
@@ -75,13 +43,16 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
             height: 40,
           ),
           Flexible(
+            flex: 4,
             child: SlideCardWidget(
-              initialCount: 65,
+              initialCount: 6,
               cardColor: Colors.redAccent,
               width: 150,
               height: 250,
               onCounterChange: (count) {
-                print('Counter is now: $count');
+                setState(() {
+                  totalPomodoros = count;
+                });
               },
             ),
           ),
