@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterzero/scheme/color_scheme.dart';
 import 'package:flutterzero/screens/home_screen.dart';
-import 'package:flutterzero/screens/pomodoro_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: colorScheme,
       ),
-      home: const PomodoroScreen(),
+      home: const HomeScreen(),
     );
   }
 }

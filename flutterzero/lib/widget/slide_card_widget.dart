@@ -37,6 +37,7 @@ class _SlideCardWidgetState extends State<SlideCardWidget> {
     super.initState();
     counter = widget.initialCount;
     startSliding();
+    timer.cancel();
   }
 
   @override
